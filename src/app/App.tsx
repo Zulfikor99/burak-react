@@ -1,7 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
-import "../css/app.css";
 import { Footer } from "./footer";
 import { HomeNavbar } from "./headers/HomeNavbar";
 import { OtherNavbar } from "./headers/OtherNavbar";
@@ -9,6 +8,9 @@ import { HomePage } from "./screens/homePage";
 import { OrdersPage } from "./screens/ordersPage";
 import { ProductsPage } from "./screens/productsPage";
 import { UserPage } from "./screens/userPage";
+import "../css/app.css";
+import "../css/navbar.css";
+import { HelpPage } from "./screens/helpPage";
 
 // Asosiy komponent: ekranda ko'rinadigan narsa shu yerda yoziladi
 function App() {
@@ -26,6 +28,9 @@ function App() {
         </Route>
         <Route path="/member-page">
           <UserPage />
+        </Route>
+        <Route path="/help">
+          <HelpPage />
         </Route>
         <Route path="/">
           <HomePage />
