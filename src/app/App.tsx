@@ -1,7 +1,10 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "../css/app.css";
+import { Footer } from "./footer";
+import { HomeNavbar } from "./headers/HomeNavbar";
+import { OtherNavbar } from "./headers/OtherNavbar";
 import { HomePage } from "./screens/homePage";
 import { OrdersPage } from "./screens/ordersPage";
 import { ProductsPage } from "./screens/productsPage";
@@ -9,25 +12,11 @@ import { UserPage } from "./screens/userPage";
 
 // Asosiy komponent: ekranda ko'rinadigan narsa shu yerda yoziladi
 function App() {
+  const location = useLocation();
+  console.log("location:", location);
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">HomePage</Link>
-          </li>
-          <li>
-            <Link to="/products">ProductsPage</Link>
-          </li>
-          <li>
-            <Link to="/orders">OrdersPage</Link>
-          </li>
-          <li>
-            <Link to="/member-page">UserPage</Link>
-          </li>
-        </ul>
-      </nav>
-
+    <>
+      {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
       <Switch>
         <Route path="/products">
           <ProductsPage />
@@ -42,7 +31,8 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
-    </div>
+      <Footer />
+    </>
   );
 }
 
