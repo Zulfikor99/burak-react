@@ -1,9 +1,9 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
-import Footer from "./footer";
-import  HomeNavbar  from "./headers/HomeNavbar";
-import  OtherNavbar  from "./headers/OtherNavbar";
+import Footer from "./components/footer";
+import  HomeNavbar  from "./components/headers/HomeNavbar";
+import  OtherNavbar  from "./components/headers/OtherNavbar";
 import  HomePage  from "./screens/homePage";
 import  OrdersPage  from "./screens/ordersPage";
 import  ProductsPage  from "./screens/productsPage";
