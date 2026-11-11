@@ -12,6 +12,7 @@ import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
 import  HelpPage  from "./screens/helpPage";
+import Test from "./screens/Test";
 
 // Asosiy komponent: ekranda ko'rinadigan narsa shu yerda yoziladi
 function App() {
@@ -34,7 +35,8 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          <Test />
+          {/* <HomePage /> */}
         </Route>
       </Switch>
       <Footer />

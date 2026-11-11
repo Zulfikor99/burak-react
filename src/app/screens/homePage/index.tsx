@@ -9,6 +9,7 @@ import "../../../css/home.css";
 import "../../../css/products.css";
 
 export default function HomePage() {
+  
   return (
     <div className={"homepage"}>
       <Statistics />

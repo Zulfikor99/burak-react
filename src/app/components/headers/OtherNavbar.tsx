@@ -32,7 +32,7 @@ export default function OtherNavbar() {
 
             {authMember ? (
               <Box className={"hover-line"}>
-                <NavLink to="/member_page" activeClassName={"underline"}>
+                <NavLink to="/member-page" activeClassName={"underline"}>
                   MyPage
                 </NavLink>
               </Box>
