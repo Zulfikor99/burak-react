@@ -34,11 +34,8 @@ interface ProductProps {
 
 export default function Products(props: ProductProps) {
   const { onAdd } = props;
-  // Redux'ga yozish
   const { setProducts } = actionDispatch(useDispatch());
-  // Redux'dan o'qish
   const { products } = useSelector(productsRetriever);
-  // Qidiruv parametrlari
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
@@ -46,12 +43,9 @@ export default function Products(props: ProductProps) {
     productCollection: ProductCollection.DISH,
     search: "",
   });
-  // Input matni
   const [searchText, setSearchText] = useState<string>("");
-  // Sahifaga o'tish
   const history = useHistory();
 
-  // Mahsulotlarni backenddan olish
   useEffect(() => {
     const product = new ProductService();
     product
@@ -60,7 +54,6 @@ export default function Products(props: ProductProps) {
       .catch((err) => console.log(err));
   }, [productSearch]);
 
-  // Input tozalansa qidiruvni bekor qilish
   useEffect(() => {
     if (searchText === "") {
       productSearch.search = "";
@@ -69,33 +62,28 @@ export default function Products(props: ProductProps) {
   }, [searchText]);
 
   /** Handlers */
-  // Kategoriya tanlash (Dish, Drink, Salad...)
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
     setProductSearch({ ...productSearch });
   };
 
-  // Tartiblash (New, Price, Views)
   const searchOrderHandler = (order: string) => {
     productSearch.page = 1;
     productSearch.order = order;
     setProductSearch({ ...productSearch });
   };
 
-  // Qidirish (Enter yoki Search bosilganda)
   const searchProductHandler = () => {
     productSearch.search = searchText;
     setProductSearch({ ...productSearch });
   };
 
-  // Sahifa almashtirish (1, 2, 3...)
   const paginationHandler = (event: React.ChangeEvent<any>, value: number) => {
     productSearch.page = value;
     setProductSearch({ ...productSearch });
   };
 
-  // Mahsulot sahifasiga o'tish
   const chooseDishhandler = (id: string) => {
     history.push(`/products/${id}`);
   };

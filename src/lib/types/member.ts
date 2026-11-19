@@ -1,7 +1,6 @@
 import { MemberStatus, MemberType } from "../enums/member.enum";
 
 export interface Member {
-  // db dan qaytayotgan data
   _id: string;
   memberType: MemberType;
   memberStatus: MemberStatus;
