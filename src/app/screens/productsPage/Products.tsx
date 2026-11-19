@@ -18,6 +18,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import ProductService from "../../services/ProductService";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router";
+import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE & SELECTOR */
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -27,9 +28,17 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
-export default function Products() {
+interface ProductProps {
+  onAdd: (input: CartItem) => void;
+}
+
+export default function Products(props: ProductProps) {
+  const { onAdd } = props;
+  // Redux'ga yozish
   const { setProducts } = actionDispatch(useDispatch());
+  // Redux'dan o'qish
   const { products } = useSelector(productsRetriever);
+  // Qidiruv parametrlari
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
@@ -37,9 +46,12 @@ export default function Products() {
     productCollection: ProductCollection.DISH,
     search: "",
   });
+  // Input matni
   const [searchText, setSearchText] = useState<string>("");
+  // Sahifaga o'tish
   const history = useHistory();
 
+  // Mahsulotlarni backenddan olish
   useEffect(() => {
     const product = new ProductService();
     product
@@ -48,6 +60,7 @@ export default function Products() {
       .catch((err) => console.log(err));
   }, [productSearch]);
 
+  // Input tozalansa qidiruvni bekor qilish
   useEffect(() => {
     if (searchText === "") {
       productSearch.search = "";
@@ -56,25 +69,33 @@ export default function Products() {
   }, [searchText]);
 
   /** Handlers */
+  // Kategoriya tanlash (Dish, Drink, Salad...)
   const searchCollectionHandler = (collection: ProductCollection) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
     setProductSearch({ ...productSearch });
   };
 
+  // Tartiblash (New, Price, Views)
   const searchOrderHandler = (order: string) => {
     productSearch.page = 1;
     productSearch.order = order;
     setProductSearch({ ...productSearch });
   };
+
+  // Qidirish (Enter yoki Search bosilganda)
   const searchProductHandler = () => {
     productSearch.search = searchText;
     setProductSearch({ ...productSearch });
   };
+
+  // Sahifa almashtirish (1, 2, 3...)
   const paginationHandler = (event: React.ChangeEvent<any>, value: number) => {
     productSearch.page = value;
     setProductSearch({ ...productSearch });
   };
+
+  // Mahsulot sahifasiga o'tish
   const chooseDishhandler = (id: string) => {
     history.push(`/products/${id}`);
   };
@@ -240,7 +261,19 @@ export default function Products() {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className={"product-sale"}>{sizeVolume}</div>
-                        <Button className={"shop-btn"}>
+                        <Button
+                          className={"shop-btn"}
+                          onClick={(e) => {
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              name: product.productName,
+                              price: product.productPrice,
+                              image: product.productImages[0],
+                            });
+                            e.stopPropagation();
+                          }}
+                        >
                           <img
                             src={"/icons/shopping-cart.svg"}
                             style={{ display: "flex" }}
