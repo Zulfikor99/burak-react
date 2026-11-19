@@ -18,7 +18,7 @@ import MemberService from "../../services/MemberService";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
+  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)), // step 1
   setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });

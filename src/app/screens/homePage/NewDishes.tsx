@@ -13,10 +13,7 @@ import { createSelector } from "reselect";
 import { retrieveNewDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
-import {
-  ProductCollection,
-  ProductVolume,
-} from "../../../lib/enums/product.enum";
+import { ProductCollection } from "../../../lib/enums/product.enum";
 
 /** REDUX SLICE & SELECTOR **/
 const NewDishesRetriever = createSelector(retrieveNewDishes, (newDishes) => ({

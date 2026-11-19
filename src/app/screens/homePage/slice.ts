@@ -7,12 +7,12 @@ const initialState: HomePageState = {
   topUsers: [],
 };
 
-const homePageSlice = createSlice({ // function 
+const homePageSlice = createSlice({ // function
   name: "homePage",
   initialState,
   reducers: {
     setPopularDishes: (state, action) => {
-      state.popularDishes = action.payload;
+      state.popularDishes = action.payload; // step 2
     },
     setNewDishes: (state, action) => {
       state.newDishes = action.payload;
