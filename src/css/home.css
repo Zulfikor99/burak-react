@@ -194,13 +194,15 @@
 }
 
 .homepage .new-products-frame .product-detail .title {
-  width: 65px;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 500;
 }
 
 .homepage .new-products-frame .product-detail .price {
   margin-left: 10px;
-  width: 20px;
   font-weight: 500;
 }
 
